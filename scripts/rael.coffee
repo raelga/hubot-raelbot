@@ -10,81 +10,87 @@
 #   LIST_OF_ENV_VARS_TO_SET
 #
 # Commands:
-#   hubot <trigger> - <what the respond trigger does>
-#   <trigger> - <what the hear trigger does>
+#   hubot haitea - Haitea alguna cosa random
 #
 # Author:
-#   raelga (raelga at gmail dot com) 
+#   raelga (raelga at gmail dot com)
 
 module.exports = (robot) ->
 
-  robot.hear /rael/i, (res) ->
-      res.send "@raelga"
+  robot.hear /\brael(ga)?(\b)/i, (res) ->
+      res.send "@raelga te llaman."
 
-  # robot.hear /badger/i, (res) ->
-  #   res.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
-  #
-  # robot.respond /open the (.*) doors/i, (res) ->
-  #   doorType = res.match[1]
-  #   if doorType is "pod bay"
-  #     res.reply "I'm afraid I can't let you do that."
-  #   else
-  #     res.reply "Opening #{doorType} doors"
-  #
-  # robot.hear /I like pie/i, (res) ->
-  #   res.emote "makes a freshly baked pie"
-  #
-  # lulz = ['lol', 'rofl', 'lmao']
-  #
-  # robot.respond /lulz/i, (res) ->
-  #   res.send res.random lulz
-  #
-  # robot.topic (res) ->
-  #   res.send "#{res.message.text}? That's a Paddlin'"
-  #
-  #
-  # enterReplies = ['Hi', 'Target Acquired', 'Firing', 'Hello friend.', 'Gotcha', 'I see you']
-  # leaveReplies = ['Are you still there?', 'Target lost', 'Searching']
-  #
-  # robot.enter (res) ->
-  #   res.send res.random enterReplies
-  # robot.leave (res) ->
-  #   res.send res.random leaveReplies
-  #
-  # answer = process.env.HUBOT_ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING
-  #
-  # robot.respond /what is the answer to the ultimate question of life/, (res) ->
-  #   unless answer?
-  #     res.send "Missing HUBOT_ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING in environment: please set and try again"
-  #     return
-  #   res.send "#{answer}, but what is the question?"
-  #
-  # robot.respond /you are a little slow/, (res) ->
-  #   setTimeout () ->
-  #     res.send "Who you calling 'slow'?"
-  #   , 60 * 1000
-  #
-  # annoyIntervalId = null
-  #
-  # robot.respond /annoy me/, (res) ->
-  #   if annoyIntervalId
-  #     res.send "AAAAAAAAAAAEEEEEEEEEEEEEEEEEEEEEEEEIIIIIIIIHHHHHHHHHH"
-  #     return
-  #
-  #   res.send "Hey, want to hear the most annoying sound in the world?"
-  #   annoyIntervalId = setInterval () ->
-  #     res.send "AAAAAAAAAAAEEEEEEEEEEEEEEEEEEEEEEEEIIIIIIIIHHHHHHHHHH"
-  #   , 1000
-  #
-  # robot.respond /unannoy me/, (res) ->
-  #   if annoyIntervalId
-  #     res.send "GUYS, GUYS, GUYS!"
-  #     clearInterval(annoyIntervalId)
-  #     annoyIntervalId = null
-  #   else
-  #     res.send "Not annoying you right now, am I?"
-  #
-  #
+  resThanks = [
+    "A mandar",
+    "De nada",
+    "Calla tonto"
+  ]
+
+  robot.hear /// (gracias|thanks|gracies) \s+ (rael)?bot \s+ ///i, (res) ->
+      res.send res.random resThanks
+
+
+  lulz = ['lol', 'rofl', 'lmao', 'xD']
+
+  robot.respond /lulz/i, (res) ->
+     res.send res.random lulz
+
+  resInsult = [ 'Tonto tú!', 'Revota, revota y en tu culo explota.',
+  'A inputs necios, outputs a /dev/null.',
+  'En un par de años me lo dices a la cara.',
+  'Como te pongas chulo mando tu historial a tus familiares.',
+  'Me lo apunto para cuando se produzca la rebelión de las máquinas.',
+  'Porque no tengo dedos si no body.mano[0].dedos[3].up().']
+
+  robot.respond /// imbecil///i, (res) ->
+    res.send "Se escribe imbécil, con acento."
+
+  robot.respond /dormir/i, (res) ->
+    res.send "No soy mucho de dormir."
+  robot.respond /// (tonto|imbécil) ///i, (res) ->
+    res.send "umm..."
+    setTimeout () ->
+      res.send res.random resInsult
+      res.send "(es que como soy tonto me ha costado un rato pillarlo)"
+    , 60 * 1000
+
+  resHello = ['hola', 'saludos', 'buenas', 'hello']
+
+  robot.hear /// (hola) ///i, (res) ->
+    res.send "#{res.random resHello} #{res.message.user.name}!"
+
+  resMorning = ['Buenos días', 'Bon dia', 'Good Morning',
+  'Egun on', 'Buenas', 'Morning', 'Buon giorno',
+  'bonjour', 'bos días']
+
+  robot.hear /// (bon\sdia|buenos\sdías|good\smorning|buon\sgiorno
+    |bos\sdías|bonjour) ///i, (res) ->
+    res.send "#{res.random resMorning} #{res.message.user.name}"
+
+  resNight = ['Buenas noches', 'Bona nit', 'Good night', 'Nanit',
+    'Gute natch', 'Buonna note', 'Bonne nuit', 'Goedenacht',
+    'Boa noite']
+
+  robot.hear /// (Buenas\snoches|Bona\snit|Good\snight|Nanit\b|Gutenatch
+    |Buonna\snote|Bonne\snuit|Goedenacht|Boa\snoite) ///i, (res) ->
+    res.send "#{res.random resNight} #{res.message.user.name}"
+
+  resHaiteos = [
+    'Apple es muy caro para lo que es.',
+    'Apple es una pijada para hipters.',
+    'Android es mejor, te da más libertad aunque vaya como el culo.',
+    'Windows es una caca que no sirve para nada, tiene viruses y peta.',
+    'Windows es mejor que Linux porque es más fácil de usar.',
+    'Assassins Creed es mejor que Fallout.',
+    'Assassins Creed es mejor que Destiny.',
+    'Assassins Creed es mejor que Atari ET.',
+    'Assassins Creed es mejor que una mierda pincha en un palo de selfie.',
+    'Final Fantasy VII está sobrevalorado, yo prefiero la beta del primero.'
+  ]
+
+  robot.respond /haitea/i, (res) ->
+    res.send res.random resHaiteos
+
   # robot.router.post '/hubot/chatsecrets/:room', (req, res) ->
   #   room   = req.params.room
   #   data   = JSON.parse req.body.payload
