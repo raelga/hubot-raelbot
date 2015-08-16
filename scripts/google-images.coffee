@@ -7,32 +7,35 @@
 #   HUBOT_MUSTACHIFY_URL - Optional. Allow you to use your own mustachify instance.
 #
 # Commands:
-#   hubot image me <query> - The Original. Queries Google Images for <query> and returns a random top result.
-#   hubot animate me <query> - The same thing as `image me`, except adds a few parameters to try to return an animated GIF instead.
-#   hubot mustache me <url> - Adds a mustache to the specified URL.
-#   hubot mustache me <query> - Searches Google Images for the specified query and mustaches it.
+#   hubot foto de <cosa> - Te consigue una imagen de la cosa que quieras
+#   hubot gif de <cosa> - Lo mismo que foto, pero busca un gif.
+#
+# Authors: 
+#   hubot
+#   raelga (localized, unmustached)
+#
 
 module.exports = (robot) ->
-  robot.respond /(image|img)( me)? (.*)/i, (msg) ->
+  robot.respond /(imagen|img|foto|fotos)( de)? (.*)/i, (msg) ->
     imageMe msg, msg.match[3], (url) ->
       msg.send url
 
-  robot.respond /animate( me)? (.*)/i, (msg) ->
+  robot.respond /gif( de)? (.*)/i, (msg) ->
     imageMe msg, msg.match[2], true, (url) ->
       msg.send url
 
-  robot.respond /(?:mo?u)?sta(?:s|c)h(?:e|ify)?(?: me)? (.*)/i, (msg) ->
-    mustacheBaseUrl = process.env.HUBOT_MUSTACHIFY_URL?.replace(/\/$/, '') or "http://mustachify.me"
-    mustachify = "#{mustacheBaseUrl}/rand?src="
-    imagery = msg.match[1]
+#  robot.respond /(?:mo?u)?sta(?:s|c)h(?:e|ify)?(?: me)? (.*)/i, (msg) ->
+#    mustacheBaseUrl = process.env.HUBOT_MUSTACHIFY_URL?.replace(/\/$/, '') or "http://mustachify.me"
+#    mustachify = "#{mustacheBaseUrl}/rand?src="
+#    imagery = msg.match[1]
 
-    if imagery.match /^https?:\/\//i
-      encodedUrl = encodeURIComponent imagery
-      msg.send "#{mustachify}#{encodedUrl}"
-    else
-      imageMe msg, imagery, false, true, (url) ->
-        encodedUrl = encodeURIComponent url
-        msg.send "#{mustachify}#{encodedUrl}"
+#    if imagery.match /^https?:\/\//i
+#      encodedUrl = encodeURIComponent imagery
+#      msg.send "#{mustachify}#{encodedUrl}"
+#    else
+#      imageMe msg, imagery, false, true, (url) ->
+#        encodedUrl = encodeURIComponent url
+#        msg.send "#{mustachify}#{encodedUrl}"
 
 imageMe = (msg, query, animated, faces, cb) ->
   cb = animated if typeof animated == 'function'
