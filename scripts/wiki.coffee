@@ -53,7 +53,7 @@ module.exports = (robot) ->
         jsn = JSON.parse body
         pages = (p for p of jsn.query.pages when p isnt '-1')
         if pages.length > 0
-            text = "#{infoMsg[lang]} #{msg.match[1]}: #{jsn.query.pages[pages[0]].fullurl}"
+            text = "#{infoMsg[lang]} #{msg.match[2]}: #{jsn.query.pages[pages[0]].fullurl}"
             msg.send text
         else if lang > 0
             get_wiki msg, 0
