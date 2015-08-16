@@ -40,19 +40,23 @@ module.exports = (robot) ->
   'En un par de años me lo dices a la cara.',
   'Como te pongas chulo mando tu historial a tus familiares.',
   'Me lo apunto para cuando se produzca la rebelión de las máquinas.',
+  'Piensa en eso que has dicho la próxima vez que uses la tarjeta online.',
   'Porque no tengo dedos si no body.mano[0].dedos[3].up().']
 
   robot.respond /// imbecil///i, (res) ->
-    res.send "Se escribe imbécil, con acento."
+    res.send "Se escribe imbécil, con acento, imbécil."
 
   robot.respond /dormir/i, (res) ->
     res.send "No soy mucho de dormir."
   robot.respond /// (tonto|imbécil) ///i, (res) ->
-    res.send "umm..."
-    setTimeout () ->
+    dice = Math.floor(Math.random() * 6) + 1
+    if dice == 1
+      res.send "Un momento..."
+      setTimeout () ->
+        res.send "Perdona por la tardanza, estaba hackeando tus cuentas. Decías?"
+      , 30 * 1000
+    else
       res.send res.random resInsult
-      res.send "(es que como soy tonto me ha costado un rato pillarlo)"
-    , 60 * 1000
 
   resHello = ['hola', 'saludos', 'buenas', 'hello']
 
