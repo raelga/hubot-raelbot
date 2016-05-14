@@ -2,10 +2,7 @@
 //   Defines words in spanish (RAE)
 //
 // Commands:
-//   hubot rae <word> - Returns the first definition found
-//   hubot rae -all <word> - Returns all the word meanings
-//   hubot rae -todas <word> - Returns all the word meanings
-//   hubot define <word> - Alias for rae
+//   hubot define <palabra> - Devuelve la primera definición.
 //
 // Author:
 //   Guillermo Moreno

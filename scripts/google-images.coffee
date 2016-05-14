@@ -7,8 +7,8 @@
 #   HUBOT_MUSTACHIFY_URL - Optional. Allow you to use your own mustachify instance.
 #
 # Commands:
-#   hubot foto de <cosa> - Te consigue una imagen de la cosa que quieras
-#   hubot gif de <cosa> - Lo mismo que foto, pero busca un gif.
+#   hubot foto de <cosa> - 
+#   hubot gif de <cosa> - 
 #
 # Authors: 
 #   hubot
@@ -16,10 +16,11 @@
 #
 
 module.exports = (robot) ->
+
   robot.respond /(imagen|img|foto|fotos)( de)? (.*)/i, (msg) ->
     imageMe msg, msg.match[3], (url) ->
       msg.send url
-
+  
   robot.respond /gif( de)? (.*)/i, (msg) ->
     imageMe msg, msg.match[2], true, (url) ->
       msg.send url

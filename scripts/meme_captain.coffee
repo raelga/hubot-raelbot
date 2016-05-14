@@ -6,30 +6,18 @@
 #
 # Commands:
 #   hubot Y U NO <text> - Generates the Y U NO GUY with the bottom caption of <text>
-#   hubot <text> (SUCCESS|NAILED IT) - Generates success kid with the top caption of <text>
-#   hubot <text> ALL the <things> - Generates ALL THE THINGS
-#   hubot <text> TOO DAMN <high> - Generates THE RENT IS TOO DAMN HIGH guy
-#   hubot Yo dawg <text> so <text> - Generates Yo Dawg
-#   hubot All your <text> are belong to <text> - All your <text> are belong to <text>
-#   hubot If <text>, <word that can start a question> <text>? - Generates Philosoraptor
-#   hubot <text>, BITCH PLEASE <text> - Generates Yao Ming
-#   hubot <text>, COURAGE <text> - Generates Courage Wolf
-#   hubot ONE DOES NOT SIMPLY <text> - Generates Boromir
-#   hubot <text> GONNA HAVE A BAD TIME - Ski Instructor
-#   hubot <text> TROLLFACE <text> - Troll Face
-#   hubot Aliens guy <text> - Aliens guy weighs in on something
-#   hubot Brace yourself <text> - Ned Stark braces for <text>
-#   hubot Iron Price <text> - To get <text>? Pay the iron price!
-#   hubot Not sure if <something> or <something else> - Generates a Futurama Fry meme
-#   hubot WHAT IF I TOLD YOU <text> - Morpheus What if I told you
-#   hubot WTF <text> - Picard WTF
-#   hubot MUCH <text> (SO|VERY) <text> - Generates Doge
-#   hubot <text> EVERYWHERE - Generates Buzz Lightyear
+#   hubot <text> EVERYWHERE - Generates Everywhere meme
+#   hubot excluye <text> - Generates Pkts Excluyed meme
 #
 # Author:
 #   bobanj, ericjsilva
 
 module.exports = (robot) ->
+  
+  robot.respond /EXCLUYE a?\s?(.+)/i, (msg) ->
+    memeGenerator msg, '1LujdQ', msg.match[1], "ESTAS EXCLUIDO", (url) ->
+      msg.send url
+
   robot.respond /Y U NO (.+)/i, (msg) ->
     memeGenerator msg, 'NryNmg', 'Y U NO', msg.match[1], (url) ->
       msg.send url

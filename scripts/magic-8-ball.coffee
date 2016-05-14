@@ -8,7 +8,6 @@
 #   none
 #
 # Commands:
-#   hubot magic-8 <query> - Obtain a response from the Magic 8 Ball in english.
 #   hubot bola-8 <frase> - Obtiene una respuesta de la bola 8 en castellano.
 #
 # Notes:
