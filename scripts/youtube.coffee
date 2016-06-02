@@ -9,7 +9,7 @@
 # Commands:
 #   hubot youtube me <query> - Searches YouTube for the query and returns the video embed link.
 module.exports = (robot) ->
-  robot.respond /(?:youtube|yt|video)(?: me|de)? (.*)/i, (msg) ->
+  robot.hear /(rael)?bot (?:youtube|yt)(?: me|de)? (.*)/i, (msg) ->
     unless process.env.HUBOT_YOUTUBE_API_KEY
       return msg.send "You must configure the HUBOT_YOUTUBE_API_KEY environment variable"
     query = msg.match[1]
