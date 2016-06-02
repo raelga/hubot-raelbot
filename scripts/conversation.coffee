@@ -64,7 +64,16 @@ magic8Eng = [
 ]
 
 module.exports = (robot) ->
+  
+  d = 0
 
+  robot.hear /(rael)?bot estás bien\?/i, (res) ->
+    d = 0
+    res.send "Estoy bien! Estoy bien!!"
+
+  robot.hear /(rael)?bot \?/i, (res) ->
+    d = 0
+    res.send "Estoy bien! Estoy bien!!"
+  
   robot.hear /(.*)(rael)?bot(.*)\?+/i, (msg) ->
-    msg.send msg.random magic8Esp
-
+      msg.send msg.random magic8Esp if d
