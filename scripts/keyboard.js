@@ -14,11 +14,12 @@ module.exports = function (robot) {
                    'sendMessage', 
                     { 
                       chat_id: res.message.room, 
-                      text: 'Select an option.',
+                      text: 'kkat | litter box assistant.',
                       reply_markup: 
                       {
-                        inline_keyboard: [[ { text: "1", callback_data: "1" } ],
-                                          [ { text: "2", callback_data: "2" } ]]  
+                        inline_keyboard: [[ { text: "Current", callback_data: "1" } ],
+                                          [ { text: "Last", callback_data: "2" } ],  
+                                          [ { text: "Log", callback_data: "3" } ]]  
                       }
                     },
                     function (error, response) {
@@ -26,15 +27,37 @@ module.exports = function (robot) {
                       console.log(response);
                     });
     });
+    
     robot.on('inlineQuery', function (query) {
-          var cbd = query.callback_query.data;
-          switch(cbd) {
+          
+          var cbq;
+          console.log(query);
+
+          try {
+            cbq = query.callback_query;
+          } catch (e) {
+            console.log(e.name + ': ' + e.message);
+            return false;
+          }
+          robot.emit('telegram:invoke',
+                     'answerCallbackQuery',
+                     {
+                      callback_query_id: cbq.id,
+                      text: "Read :" + cbq.data
+                     },
+                     function(error, response) {
+                      console.log(error);
+                      console.log(response);
+                     });
+         
+          cbq.message("Data read: " +cbq.data);
+
+          switch(cbq.data) {
             case 1: console.log("Opcion 1");
             case 2: console.log("Opcion 2");
-            default: console.log("Opcion 3");
-
+            case 3: console.log("Opcion 3");
+            default: console.log("Opcion d");
           }
-          
           },
           function (error, response) {
             console.log(error);
